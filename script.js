@@ -9,14 +9,13 @@
 function initSmoothScroll() {
     const navOffset = 80; // Height of fixed navigation bar
     
-    // Handle "Get Started" button
-    const btnGetStarted = document.getElementById('btnGetStarted');
-    if (btnGetStarted) {
-        btnGetStarted.addEventListener('click', (e) => {
-            e.preventDefault();
-            const tutorialSection = document.getElementById('tutorial');
-            if (tutorialSection) {
-                const elementPosition = tutorialSection.getBoundingClientRect().top;
+    // Handle scroll indicator click
+    const scrollIndicator = document.getElementById('scrollIndicator');
+    if (scrollIndicator) {
+        scrollIndicator.addEventListener('click', () => {
+            const problemSection = document.getElementById('problem');
+            if (problemSection) {
+                const elementPosition = problemSection.getBoundingClientRect().top;
                 const offsetPosition = elementPosition + window.pageYOffset - navOffset;
                 
                 window.scrollTo({
@@ -93,27 +92,56 @@ function initScrollAnimations() {
 // ============================================
 
 function initScrollBasedTreeAnimation() {
+    const section = document.getElementById('problem');
     const treeBefore = document.querySelector('.tree-before');
     const treeAfter = document.querySelector('.tree-after');
     const treeArrow = document.querySelector('.tree-arrow');
-    const progressWheel = document.querySelector('.progress-wheel');
-    const wheelFill = document.querySelector('.wheel-fill');
+    const centerSizeCounter = document.querySelector('.center-size-counter');
+    const treeCenter = document.querySelector('.tree-center');
     const afterRows = document.querySelectorAll('.tree-after .finder-row');
+    const totalSizeValue = document.getElementById('totalSizeValue');
     
-    if (!treeBefore || !treeAfter || !treeArrow) return;
+    if (!treeBefore || !treeAfter || !treeArrow || !section) return;
+    
+    // File sizes for animation calculation (in MB)
+    // Before: Q1=245, Q2=312, Budget=89, NDA=2.4, Agreement=5.1, Terms=18, Sales=156 = 827.5 MB
+    // After: CSVs ~3.2MB, TXTs ~0.1MB = ~3.3 MB total
+    const startSize = 827.5;
+    const endSize = 3.3;
+    
+    function formatSize(mb) {
+        if (mb >= 1) {
+            return mb.toFixed(1) + ' MB';
+        } else {
+            return (mb * 1000).toFixed(0) + ' KB';
+        }
+    }
     
     function updateTreeAnimation() {
-        const rect = treeBefore.getBoundingClientRect();
         const windowHeight = window.innerHeight;
-        const padding = 100; // Padding before bottom enters
+        const sectionRect = section.getBoundingClientRect();
         
-        // Start: when top of .tree-before enters viewport
-        // End: before bottom of .tree-before enters viewport (with padding)
-        const topEnterPoint = windowHeight; // Top enters when rect.top <= windowHeight
-        const bottomEnterPoint = windowHeight - padding; // End animation before bottom enters
+        // Use the progress wheel/center element as the trigger point for START
+        const centerRect = treeCenter ? treeCenter.getBoundingClientRect() : treeBefore.getBoundingClientRect();
         
-        // Check if we're below the element (element is above viewport or entering)
-        const isBelowViewport = rect.top > windowHeight;
+        // Animation starts when center/wheel enters viewport
+        // Animation completes when section bottom reaches viewport bottom (section fills screen)
+        const animationStartPoint = windowHeight; // Start when center enters viewport
+        
+        // Calculate when section bottom will be at viewport bottom
+        // At that point: sectionRect.bottom = windowHeight
+        // So we need: centerRect.top when sectionRect.bottom = windowHeight
+        // The distance from center to section bottom is constant
+        const centerToBottom = sectionRect.bottom - centerRect.top;
+        
+        // Animation should complete when section.bottom = windowHeight
+        // At start: centerRect.top = windowHeight (center just entered)
+        // At end: sectionRect.bottom = windowHeight, so centerRect.top = windowHeight - centerToBottom
+        const animationEndCenterTop = windowHeight - centerToBottom;
+        const animationRange = animationStartPoint - animationEndCenterTop;
+        
+        // Check if we're below the element
+        const isBelowViewport = centerRect.top > windowHeight;
         
         if (isBelowViewport) {
             // Reset all animations when element is below viewport
@@ -121,77 +149,44 @@ function initScrollBasedTreeAnimation() {
             treeAfter.style.opacity = '0';
             treeAfter.style.transform = 'translateX(20px)';
             
-            if (progressWheel) progressWheel.style.opacity = '0';
-            if (wheelFill) wheelFill.style.strokeDashoffset = '113.1'; // Reset fill
+            if (centerSizeCounter) centerSizeCounter.style.opacity = '0';
+            if (totalSizeValue) totalSizeValue.textContent = formatSize(startSize);
             
             afterRows.forEach(row => {
                 row.style.opacity = '0';
                 row.style.transform = 'translateY(5px)';
             });
         } else {
-            // Fade-in progress: Starts when container enters viewport (rect.top <= windowHeight)
-            const fadeStartTop = topEnterPoint;
-            const endTop = bottomEnterPoint - rect.height;
-            const fadeTotalRange = fadeStartTop - endTop;
-            const fadeCurrentDistance = fadeStartTop - rect.top;
-            const fadeProgress = Math.max(0, Math.min(1, fadeCurrentDistance / fadeTotalRange));
+            // Calculate progress based on center element position
+            const scrolledPast = animationStartPoint - centerRect.top;
+            const overallProgress = Math.max(0, Math.min(1, scrolledPast / animationRange));
             
-            // Fill progress: Starts when first row is about to pop (delayed)
-            // Delay start to match row trigger: windowHeight - (windowHeight / 3)
-            // Add extra offset for header/first row position: ~60px
-            const triggerPadding = windowHeight / 3;
-            const fillStartTop = windowHeight - triggerPadding - 60;
+            // Fade in center elements immediately when they enter viewport
+            const centerOpacity = Math.min(1, overallProgress / 0.1);
+            treeArrow.style.opacity = centerOpacity.toString();
+            if (centerSizeCounter) centerSizeCounter.style.opacity = centerOpacity.toString();
             
-            // Finish when the bottom of the container reaches the trigger point (last row pops)
-            // rect.bottom = windowHeight - triggerPadding
-            // Since rect.top = rect.bottom - rect.height -> fillEndTop = (windowHeight - triggerPadding) - rect.height
-            const fillEndTop = (windowHeight - triggerPadding) - rect.height;
-            
-            const fillTotalRange = fillStartTop - fillEndTop;
-            const fillCurrentDistance = fillStartTop - rect.top;
-            const fillProgress = Math.max(0, Math.min(1, fillCurrentDistance / fillTotalRange));
-            
-            // Fade in center elements (arrow and wheel) based on fadeProgress
-            if (fadeProgress > 0) {
-                // Fade in quickly
-                const opacity = Math.min(1, fadeProgress / 0.2);
-                treeArrow.style.opacity = opacity.toString();
-                if (progressWheel) progressWheel.style.opacity = opacity.toString();
-                
-                // Animate wheel fill based on fillProgress
-                if (wheelFill) {
-                    // Full circumference is ~113.1
-                    const circumference = 113.1;
-                    // Use fillProgress for the filling animation
-                    const offset = circumference * (1 - fillProgress);
-                    wheelFill.style.strokeDashoffset = offset.toString();
-                }
-            } else {
-                treeArrow.style.opacity = '0';
-                if (progressWheel) progressWheel.style.opacity = '0';
-            }
-            
-            // Animate tree panel sliding in (0.1-0.4 of progress) - faster
-            if (fadeProgress > 0.1) {
-                const treeProgress = Math.min(1, (fadeProgress - 0.1) / 0.3);
-                const opacity = treeProgress;
-                const translateX = 20 * (1 - treeProgress);
-                treeAfter.style.opacity = opacity.toString();
-                treeAfter.style.transform = `translateX(${translateX}px)`;
+            // Animate tree panel sliding in (starts at 5% progress, completes by 30%)
+            if (overallProgress > 0.05) {
+                const treeProgress = Math.min(1, (overallProgress - 0.05) / 0.25);
+                treeAfter.style.opacity = treeProgress.toString();
+                treeAfter.style.transform = `translateX(${20 * (1 - treeProgress)}px)`;
             } else {
                 treeAfter.style.opacity = '0';
                 treeAfter.style.transform = 'translateX(20px)';
             }
             
-            // Animate individual rows based on their OWN visibility
-            afterRows.forEach((row) => {
-                const rowRect = row.getBoundingClientRect();
-                // Trigger when row is well inside viewport (1/3 of screen height buffer)
-                // This delays the pop until the user has clearly scrolled to it, creating a "processing" feel
-                const isVisible = rowRect.top < windowHeight - (windowHeight / 3);
+            // Animate individual rows sequentially based on overall progress
+            const rowCount = afterRows.length;
+            const rowStartPoint = 0.15;  // First row appears at 15%
+            const rowEndPoint = 0.90;    // Last row appears at 90%
+            const rowRange = rowEndPoint - rowStartPoint;
+            
+            afterRows.forEach((row, index) => {
+                // Each row appears at a specific progress point
+                const rowStartProgress = rowStartPoint + (index / rowCount) * rowRange;
                 
-                if (isVisible) {
-                    // Pop-in effect: instant appearance when triggered
+                if (overallProgress >= rowStartProgress) {
                     row.style.opacity = '1';
                     row.style.transform = 'translateY(0px)';
                 } else {
@@ -199,6 +194,15 @@ function initScrollBasedTreeAnimation() {
                     row.style.transform = 'translateY(5px)';
                 }
             });
+            
+            // Animate total size counter - synced with row animation
+            // Size should reach minimum when last row appears (at rowEndPoint)
+            if (totalSizeValue) {
+                // Map overallProgress to size progress (0 at rowStartPoint, 1 at rowEndPoint)
+                const sizeProgress = Math.max(0, Math.min(1, (overallProgress - rowStartPoint) / rowRange));
+                const currentSize = startSize - (sizeProgress * (startSize - endSize));
+                totalSizeValue.textContent = formatSize(currentSize);
+            }
         }
     }
     

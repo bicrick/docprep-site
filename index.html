@@ -29,7 +29,7 @@
     <!-- Hero Navigation -->
     <nav class="hero-nav">
         <a href="#hero" class="nav-link">Home</a>
-        <a href="#tutorial" class="nav-link">How it works</a>
+        <a href="#problem" class="nav-link">How it works</a>
         <a href="#use-case" class="nav-link">Use Case</a>
         <a href="#download" class="nav-link">Download</a>
     </nav>
@@ -42,7 +42,8 @@
                     <span class="logo-text">docprep</span>
                 </div>
                 <p class="welcome-description">
-                    Make your documents AI-ready. Extract clean text from complex file formats.
+                    Make your documents AI-ready.<br>
+                    Extract clean text from complex file formats.
                 </p>
                 <div class="welcome-formats">
                     <img src="assets/pdf-logo.svg" alt="PDF" class="format-logo">
@@ -50,69 +51,82 @@
                     <img src="assets/word-logo.svg" alt="Word" class="format-logo">
                     <img src="assets/powerpoint-logo.svg" alt="PowerPoint" class="format-logo">
                 </div>
-                <button class="btn btn-primary btn-large" id="btnGetStarted">
-                    Get Started
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                <div class="scroll-indicator" id="scrollIndicator">
+                    <svg class="scroll-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M12 5v14M5 12l7 7 7-7"/>
                     </svg>
-                </button>
+                </div>
             </div>
         </section>
 
-        <!-- Section 2: Tutorial - How it works -->
-        <section class="landing-section section-tutorial" id="tutorial">
+        <!-- Section 2: The Problem & Solution -->
+        <section class="landing-section section-tutorial" id="problem">
             <div class="section-content intro-content">
-                <h2 class="intro-title">How it works</h2>
-                <p class="intro-subtitle">DocPrep extracts clean, structured data from your documents</p>
-                
+                <h2 class="intro-title">AI doesn't understand your documents</h2>
+                <p class="intro-subtitle">Bloated file formats bury your data in formatting noise.</p>
+                <p class="intro-subtitle"><span class="docprep-logo-text">docprep</span> extracts what matters.</p>
                 <div class="tree-comparison">
                     <!-- Before Tree -->
                     <div class="tree-panel tree-before">
-                        <div class="tree-label">Your Files</div>
+                        <div class="tree-header">
+                            <span class="tree-header-name">Name</span>
+                            <span class="tree-header-size">Size</span>
+                        </div>
                         <div class="finder-list">
                             <div class="finder-row folder">
                                 <svg class="icon icon-folder" viewBox="0 0 24 24" fill="currentColor"><path d="M10 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-8l-2-2z"/></svg>
-                                <span>Project Files</span>
+                                <span class="file-name">Project Files</span>
+                                <span class="file-size">--</span>
                             </div>
                             <div class="finder-row folder indent-1">
                                 <svg class="icon icon-folder" viewBox="0 0 24 24" fill="currentColor"><path d="M10 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-8l-2-2z"/></svg>
-                                <span>Financials</span>
+                                <span class="file-name">Financials</span>
+                                <span class="file-size">--</span>
                             </div>
                             <div class="finder-row file indent-2">
-                                <svg class="icon icon-excel" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" fill="#217346"/><path d="M7 7l4 5-4 5M12 7h5M12 12h5M12 17h5" stroke="white" stroke-width="1.5" fill="none"/></svg>
-                                <span>Q1_Report.xlsx</span>
+                                <img src="assets/excel-logo.svg" alt="Excel" class="icon icon-file">
+                                <span class="file-name">Q1_Report.xlsx</span>
+                                <span class="file-size">245 MB</span>
                             </div>
                             <div class="finder-row file indent-2">
-                                <svg class="icon icon-excel" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" fill="#217346"/><path d="M7 7l4 5-4 5M12 7h5M12 12h5M12 17h5" stroke="white" stroke-width="1.5" fill="none"/></svg>
-                                <span>Q2_Report.xlsx</span>
+                                <img src="assets/excel-logo.svg" alt="Excel" class="icon icon-file">
+                                <span class="file-name">Q2_Report.xlsx</span>
+                                <span class="file-size">312 MB</span>
                             </div>
                             <div class="finder-row file indent-2">
-                                <svg class="icon icon-excel" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" fill="#217346"/><path d="M7 7l4 5-4 5M12 7h5M12 12h5M12 17h5" stroke="white" stroke-width="1.5" fill="none"/></svg>
-                                <span>Budget_2024.xls</span>
+                                <img src="assets/excel-logo.svg" alt="Excel" class="icon icon-file">
+                                <span class="file-name">Budget_2024.xls</span>
+                                <span class="file-size">89 MB</span>
                             </div>
                             <div class="finder-row folder indent-1">
                                 <svg class="icon icon-folder" viewBox="0 0 24 24" fill="currentColor"><path d="M10 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-8l-2-2z"/></svg>
-                                <span>Contracts</span>
+                                <span class="file-name">Contracts</span>
+                                <span class="file-size">--</span>
                             </div>
                             <div class="finder-row file indent-2">
-                                <svg class="icon icon-word" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" fill="#2b579a"/><path d="M7 8l2 8 2-6 2 6 2-8" stroke="white" stroke-width="1.5" fill="none"/></svg>
-                                <span>NDA_v1.docx</span>
+                                <img src="assets/word-logo.svg" alt="Word" class="icon icon-file">
+                                <span class="file-name">NDA_v1.docx</span>
+                                <span class="file-size">2.4 MB</span>
                             </div>
                             <div class="finder-row file indent-2">
-                                <svg class="icon icon-word" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" fill="#2b579a"/><path d="M7 8l2 8 2-6 2 6 2-8" stroke="white" stroke-width="1.5" fill="none"/></svg>
-                                <span>Agreement_FINAL.docx</span>
+                                <img src="assets/word-logo.svg" alt="Word" class="icon icon-file">
+                                <span class="file-name">Agreement_FINAL.docx</span>
+                                <span class="file-size">5.1 MB</span>
                             </div>
                             <div class="finder-row file indent-2">
-                                <svg class="icon icon-pdf" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" fill="#d63031"/><text x="12" y="15" text-anchor="middle" fill="white" font-size="7" font-weight="bold">PDF</text></svg>
-                                <span>Terms.pdf</span>
+                                <img src="assets/pdf-logo.svg" alt="PDF" class="icon icon-file">
+                                <span class="file-name">Terms.pdf</span>
+                                <span class="file-size">18 MB</span>
                             </div>
                             <div class="finder-row folder indent-1">
                                 <svg class="icon icon-folder" viewBox="0 0 24 24" fill="currentColor"><path d="M10 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-8l-2-2z"/></svg>
-                                <span>Presentations</span>
+                                <span class="file-name">Presentations</span>
+                                <span class="file-size">--</span>
                             </div>
                             <div class="finder-row file indent-2">
-                                <svg class="icon icon-pptx" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" fill="#d24726"/><circle cx="10" cy="12" r="4" stroke="white" stroke-width="1.5" fill="none"/><path d="M10 8v8M14 12h4" stroke="white" stroke-width="1.5"/></svg>
-                                <span>Sales_Deck.pptx</span>
+                                <img src="assets/powerpoint-logo.svg" alt="PowerPoint" class="icon icon-file">
+                                <span class="file-name">Sales_Deck.pptx</span>
+                                <span class="file-size">156 MB</span>
                             </div>
                         </div>
                     </div>
@@ -124,73 +138,88 @@
                                 <path d="M5 12h14M12 5l7 7-7 7"/>
                             </svg>
                         </div>
-                        <div class="progress-wheel">
-                            <svg viewBox="0 0 40 40">
-                                <circle class="wheel-track" cx="20" cy="20" r="18" fill="none" stroke-width="3"></circle>
-                                <circle class="wheel-fill" cx="20" cy="20" r="18" fill="none" stroke-width="3"></circle>
-                            </svg>
+                        <div class="center-size-counter">
+                            <span class="center-size-label">Total size</span>
+                            <span class="center-size-value" id="totalSizeValue">827.5 MB</span>
                         </div>
                     </div>
                     
                     <!-- After Tree -->
                     <div class="tree-panel tree-after">
-                        <div class="tree-label">Extracted Output</div>
+                        <div class="tree-header">
+                            <span class="tree-header-name">Name</span>
+                            <span class="tree-header-size">Size</span>
+                        </div>
                         <div class="finder-list">
                             <div class="finder-row folder">
                                 <svg class="icon icon-folder" viewBox="0 0 24 24" fill="currentColor"><path d="M10 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-8l-2-2z"/></svg>
-                                <span>Project Files_extracted</span>
+                                <span class="file-name">Project Files_extracted</span>
+                                <span class="file-size">--</span>
                             </div>
                             <div class="finder-row folder indent-1">
                                 <svg class="icon icon-folder" viewBox="0 0 24 24" fill="currentColor"><path d="M10 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-8l-2-2z"/></svg>
-                                <span>Financials</span>
+                                <span class="file-name">Financials</span>
+                                <span class="file-size">--</span>
                             </div>
                             <div class="finder-row folder indent-2">
                                 <svg class="icon icon-folder" viewBox="0 0 24 24" fill="currentColor"><path d="M10 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-8l-2-2z"/></svg>
-                                <span>q1_report</span>
+                                <span class="file-name">q1_report</span>
+                                <span class="file-size">--</span>
                             </div>
                             <div class="finder-row file indent-3">
                                 <svg class="icon icon-csv" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" fill="#217346"/><path d="M7 8h10M7 12h10M7 16h10" stroke="white" stroke-width="1.5"/></svg>
-                                <span>sheet1.csv</span>
+                                <span class="file-name">sheet1.csv</span>
+                                <span class="file-size">1.2 MB</span>
                             </div>
                             <div class="finder-row folder indent-2">
                                 <svg class="icon icon-folder" viewBox="0 0 24 24" fill="currentColor"><path d="M10 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-8l-2-2z"/></svg>
-                                <span>q2_report</span>
+                                <span class="file-name">q2_report</span>
+                                <span class="file-size">--</span>
                             </div>
                             <div class="finder-row file indent-3">
                                 <svg class="icon icon-csv" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" fill="#217346"/><path d="M7 8h10M7 12h10M7 16h10" stroke="white" stroke-width="1.5"/></svg>
-                                <span>sheet1.csv</span>
+                                <span class="file-name">sheet1.csv</span>
+                                <span class="file-size">1.5 MB</span>
                             </div>
                             <div class="finder-row folder indent-2">
                                 <svg class="icon icon-folder" viewBox="0 0 24 24" fill="currentColor"><path d="M10 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-8l-2-2z"/></svg>
-                                <span>budget_2024</span>
+                                <span class="file-name">budget_2024</span>
+                                <span class="file-size">--</span>
                             </div>
                             <div class="finder-row file indent-3">
                                 <svg class="icon icon-csv" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" fill="#217346"/><path d="M7 8h10M7 12h10M7 16h10" stroke="white" stroke-width="1.5"/></svg>
-                                <span>sheet1.csv</span>
+                                <span class="file-name">sheet1.csv</span>
+                                <span class="file-size">420 KB</span>
                             </div>
                             <div class="finder-row folder indent-1">
                                 <svg class="icon icon-folder" viewBox="0 0 24 24" fill="currentColor"><path d="M10 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-8l-2-2z"/></svg>
-                                <span>Contracts</span>
+                                <span class="file-name">Contracts</span>
+                                <span class="file-size">--</span>
                             </div>
                             <div class="finder-row file indent-2">
                                 <svg class="icon icon-txt" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" fill="#6b7280"/><path d="M7 8h10M7 12h7M7 16h9" stroke="white" stroke-width="1.5"/></svg>
-                                <span>nda_v1.txt</span>
+                                <span class="file-name">nda_v1.txt</span>
+                                <span class="file-size">12 KB</span>
                             </div>
                             <div class="finder-row file indent-2">
                                 <svg class="icon icon-txt" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" fill="#6b7280"/><path d="M7 8h10M7 12h7M7 16h9" stroke="white" stroke-width="1.5"/></svg>
-                                <span>agreement_final.txt</span>
+                                <span class="file-name">agreement_final.txt</span>
+                                <span class="file-size">24 KB</span>
                             </div>
                             <div class="finder-row file indent-2">
                                 <svg class="icon icon-txt" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" fill="#6b7280"/><path d="M7 8h10M7 12h7M7 16h9" stroke="white" stroke-width="1.5"/></svg>
-                                <span>terms.txt</span>
+                                <span class="file-name">terms.txt</span>
+                                <span class="file-size">8 KB</span>
                             </div>
                             <div class="finder-row folder indent-1">
                                 <svg class="icon icon-folder" viewBox="0 0 24 24" fill="currentColor"><path d="M10 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-8l-2-2z"/></svg>
-                                <span>Presentations</span>
+                                <span class="file-name">Presentations</span>
+                                <span class="file-size">--</span>
                             </div>
                             <div class="finder-row file indent-2">
                                 <svg class="icon icon-txt" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" fill="#6b7280"/><path d="M7 8h10M7 12h7M7 16h9" stroke="white" stroke-width="1.5"/></svg>
-                                <span>sales_deck.txt</span>
+                                <span class="file-name">sales_deck.txt</span>
+                                <span class="file-size">52 KB</span>
                             </div>
                         </div>
                     </div>
@@ -220,14 +249,6 @@
                 </div>
                 
                 <p class="tutorial-description">Chat with your business documents natively. Make plans, visualizations, and more.</p>
-                
-                <div class="security-notice">
-                    <svg class="security-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                    </svg>
-                    <p class="security-text">All processing happens locally on your device. Your documents never leave your computer.</p>
-                </div>
             </div>
         </section>
 
@@ -267,6 +288,14 @@
                             <path d="M5 12h14M12 5l7 7-7 7"/>
                         </svg>
                     </a>
+                </div>
+                
+                <div class="security-notice">
+                    <svg class="security-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                    </svg>
+                    <p class="security-text">100% offline. Your data never leaves your device.</p>
                 </div>
             </div>
         </section>

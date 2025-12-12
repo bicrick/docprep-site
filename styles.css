@@ -206,6 +206,12 @@ body {
     padding-top: calc(var(--space-2xl) + 40px);
 }
 
+.hero-tagline {
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-lg);
+}
+
 .welcome-logo {
     margin-bottom: var(--space-lg);
 }
@@ -246,8 +252,171 @@ body {
     opacity: 1;
 }
 
+/* Scroll Indicator */
+.scroll-indicator {
+    cursor: pointer;
+    padding: var(--space-md);
+}
+
+.scroll-arrow {
+    width: 28px;
+    height: 28px;
+    color: var(--text-secondary);
+    opacity: 0.6;
+    transition: opacity var(--duration-fast) var(--ease-out), 
+                transform var(--duration-fast) var(--ease-out);
+}
+
+.scroll-indicator:hover .scroll-arrow {
+    opacity: 1;
+    transform: translateY(3px);
+}
+
 /* ============================================
-   Section 2: Tutorial - How it works
+   Section 2: The Problem
+   ============================================ */
+
+.section-problem {
+    background: var(--bg-secondary);
+}
+
+.problem-content {
+    max-width: 700px;
+}
+
+.problem-title {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 1.75rem;
+    color: var(--text-primary);
+    margin-bottom: var(--space-sm);
+}
+
+.problem-subtitle {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    margin-bottom: var(--space-2xl);
+    max-width: 480px;
+    line-height: 1.6;
+}
+
+.size-comparison {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xl);
+    margin-bottom: var(--space-2xl);
+}
+
+.size-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-xl);
+    background: var(--bg-card);
+    border-radius: var(--radius-md);
+    min-width: 140px;
+}
+
+.size-icon-wrapper {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.size-icon-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.size-icon-svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* Bloat rings animation for the "before" card */
+.bloat-rings {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid var(--text-muted);
+    border-radius: 50%;
+    opacity: 0.3;
+}
+
+.ring-1 {
+    width: 80px;
+    height: 80px;
+    opacity: 0.25;
+}
+
+.ring-2 {
+    width: 100px;
+    height: 100px;
+    opacity: 0.15;
+}
+
+.ring-3 {
+    width: 120px;
+    height: 120px;
+    opacity: 0.08;
+}
+
+.size-label {
+    font-family: var(--font-mono);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.size-before .size-label {
+    color: var(--warning);
+}
+
+.size-after .size-label {
+    color: var(--success);
+}
+
+.size-desc {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-align: center;
+}
+
+.size-arrow {
+    width: 32px;
+    height: 32px;
+    color: var(--accent-primary);
+    flex-shrink: 0;
+}
+
+.size-arrow svg {
+    width: 100%;
+    height: 100%;
+}
+
+.problem-tagline {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+/* ============================================
+   Section 3: Tutorial - How it works
    ============================================ */
 
 .section-tutorial {
@@ -272,22 +441,28 @@ body {
 .intro-title {
     font-family: var(--font-sans);
     font-weight: 600;
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     color: var(--text-primary);
-    margin-bottom: var(--space-xs);
+    margin-bottom: var(--space-sm);
 }
 
 .intro-subtitle {
     color: var(--text-secondary);
-    font-size: 0.9rem;
-    margin-bottom: var(--space-lg);
+    font-size: 1rem;
+    margin-bottom: var(--space-sm);
+    max-width: 520px;
+    line-height: 1.6;
+}
+
+.intro-subtitle:last-of-type {
+    margin-bottom: var(--space-xl);
 }
 
 .tree-comparison {
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    gap: var(--space-xl);
+    gap: var(--space-2xl);
     margin-bottom: var(--space-lg);
     width: 100%;
     flex-shrink: 0;
@@ -314,6 +489,33 @@ body {
     margin-bottom: var(--space-sm);
     padding-bottom: var(--space-xs);
     border-bottom: 1px solid var(--border-subtle);
+}
+
+.tree-header {
+    display: flex;
+    align-items: center;
+    padding: 0.4rem 0.5rem;
+    border-bottom: 1px solid var(--border-subtle);
+    margin-bottom: var(--space-sm);
+}
+
+.tree-header-name {
+    flex: 1;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+}
+
+.tree-header-size {
+    width: 70px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    text-align: right;
 }
 
 .finder-list {
@@ -346,10 +548,20 @@ body {
     color: #f5a623;
 }
 
-.finder-row span {
+.finder-row .file-name {
+    flex: 1;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.finder-row .file-size {
+    width: 70px;
+    text-align: right;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    flex-shrink: 0;
 }
 
 .finder-row.indent-1 {
@@ -370,18 +582,25 @@ body {
     flex-shrink: 0;
 }
 
+.finder-row .icon-file {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+}
+
 .tree-center {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--space-md);
-    margin-top: 100px;
+    gap: var(--space-lg);
+    margin-top: 80px;
     flex-shrink: 0;
+    min-width: 100px;
 }
 
 .tree-arrow {
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
     color: var(--accent-primary);
     opacity: 0;
     transition: opacity var(--duration-normal) var(--ease-out);
@@ -392,28 +611,29 @@ body {
     height: 100%;
 }
 
-.progress-wheel {
-    width: 28px;
-    height: 28px;
+.center-size-counter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xs);
     opacity: 0;
     transition: opacity var(--duration-normal) var(--ease-out);
 }
 
-.progress-wheel svg {
-    width: 100%;
-    height: 100%;
-    transform: rotate(-90deg);
+.center-size-label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
 }
 
-.wheel-track {
-    stroke: var(--bg-card);
-}
-
-.wheel-fill {
-    stroke: var(--accent-primary);
-    stroke-dasharray: 113.1; /* 2 * PI * 18 */
-    stroke-dashoffset: 113.1;
-    transition: stroke-dashoffset 0.1s linear;
+.center-size-value {
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap;
 }
 
 .tree-after {
@@ -428,7 +648,6 @@ body {
     transform: translateY(5px);
     transition: opacity 0.1s ease-out, transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-
 
 /* Arrow Pulse Animation Removed */
 
@@ -515,13 +734,13 @@ body {
 }
 
 .security-notice {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: var(--space-sm);
     padding: var(--space-md) var(--space-lg);
     background: var(--bg-card);
     border-radius: var(--radius-md);
-    margin-bottom: var(--space-xl);
+    margin-top: var(--space-xl);
 }
 
 .security-icon {
@@ -622,6 +841,8 @@ body {
     font-weight: 600;
     color: var(--accent-primary);
     letter-spacing: -0.02em;
+    position: relative;
+    top: -0.1em;
 }
 
 .download-title .docprep-logo-text {
@@ -806,6 +1027,10 @@ body {
         grid-template-columns: 1fr;
     }
     
+    .hero-tagline {
+        font-size: 1.25rem;
+    }
+    
     .logo-text {
         font-size: 2.5rem;
     }
@@ -817,6 +1042,24 @@ body {
     .section-footer {
         padding: var(--space-lg) var(--space-lg);
         min-height: auto;
+    }
+    
+    /* Problem section responsive */
+    .size-comparison {
+        flex-direction: column;
+        gap: var(--space-lg);
+    }
+    
+    .size-arrow {
+        transform: rotate(90deg);
+    }
+    
+    .size-card {
+        min-width: 180px;
+    }
+    
+    .problem-title {
+        font-size: 1.5rem;
     }
 }
 
