@@ -227,26 +227,13 @@ function initScrollBasedTreeAnimation() {
 // ============================================
 
 function initDownloadButtons() {
-    const downloadMac = document.getElementById('download-mac');
     const downloadWindows = document.getElementById('download-windows');
     
-    if (downloadMac) {
-        downloadMac.addEventListener('click', (e) => {
-            e.preventDefault();
-            // Placeholder - will be replaced with actual download link
-            console.log('Mac download clicked - placeholder');
-            // TODO: Replace with actual download URL when available
-            // window.location.href = 'path/to/docprep.dmg';
-        });
-    }
-    
+    // Windows download - placeholder until build is available
     if (downloadWindows) {
         downloadWindows.addEventListener('click', (e) => {
             e.preventDefault();
-            // Placeholder - will be replaced with actual download link
             console.log('Windows download clicked - placeholder');
-            // TODO: Replace with actual download URL when available
-            // window.location.href = 'path/to/docprep.exe';
         });
     }
 }
@@ -382,6 +369,72 @@ function createPolkaDots() {
 }
 
 // ============================================
+// Modal Functionality
+// ============================================
+
+function initModals() {
+    const privacyLink = document.getElementById('privacy-link');
+    const termsLink = document.getElementById('terms-link');
+    const privacyModal = document.getElementById('privacy-modal');
+    const termsModal = document.getElementById('terms-modal');
+    
+    function openModal(modal) {
+        if (modal) {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+    
+    function closeModal(modal) {
+        if (modal) {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    }
+    
+    // Open modals
+    if (privacyLink && privacyModal) {
+        privacyLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal(privacyModal);
+        });
+    }
+    
+    if (termsLink && termsModal) {
+        termsLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal(termsModal);
+        });
+    }
+    
+    // Close modals - click close button
+    document.querySelectorAll('.modal-close').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const modal = btn.closest('.modal-overlay');
+            closeModal(modal);
+        });
+    });
+    
+    // Close modals - click overlay background
+    document.querySelectorAll('.modal-overlay').forEach(overlay => {
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) {
+                closeModal(overlay);
+            }
+        });
+    });
+    
+    // Close modals - press Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            document.querySelectorAll('.modal-overlay.active').forEach(modal => {
+                closeModal(modal);
+            });
+        }
+    });
+}
+
+// ============================================
 // Initialize on DOM Load
 // ============================================
 
@@ -392,4 +445,5 @@ document.addEventListener('DOMContentLoaded', () => {
     initDownloadButtons();
     initActiveNavLink();
     initScrollBasedTreeAnimation();
+    initModals();
 });
