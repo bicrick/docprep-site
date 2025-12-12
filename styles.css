@@ -252,6 +252,13 @@ body {
     opacity: 1;
 }
 
+/* Adjust Word and PowerPoint icons to match Excel visual size */
+.format-logo[alt="Word"],
+.format-logo[alt="PowerPoint"] {
+    width: 40px;
+    height: 40px;
+}
+
 /* Scroll Indicator */
 .scroll-indicator {
     cursor: pointer;
@@ -867,6 +874,7 @@ body {
     font-size: 0.85rem;
     color: var(--text-secondary);
     margin: 0;
+    white-space: nowrap;
 }
 
 .download-arrow {
@@ -887,7 +895,7 @@ body {
    ============================================ */
 
 .section-footer {
-    background: transparent;
+    background: var(--bg-card);
     padding: var(--space-xl) var(--space-xl);
     min-height: auto;
     opacity: 1 !important;
@@ -1011,16 +1019,22 @@ body {
     
     .tree-center {
         margin-top: var(--space-md);
+    }
+    
+    .tree-center .tree-arrow svg {
         transform: rotate(90deg);
     }
     
     .ide-grid {
-        flex-direction: column;
-        align-items: stretch;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: var(--space-sm);
     }
     
     .ide-card {
-        width: 100%;
+        width: auto;
+        min-width: 90px;
+        padding: var(--space-md);
     }
     
     .download-grid {
