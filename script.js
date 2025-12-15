@@ -126,7 +126,7 @@ function initScrollBasedTreeAnimation() {
         
         // Animation starts when center/wheel enters viewport
         // Animation completes when section bottom reaches viewport bottom (section fills screen)
-        const animationStartPoint = windowHeight; // Start when center enters viewport
+        const animationStartPoint = windowHeight - 300; // Start 100px after center enters viewport
         
         // Calculate when section bottom will be at viewport bottom
         // At that point: sectionRect.bottom = windowHeight
